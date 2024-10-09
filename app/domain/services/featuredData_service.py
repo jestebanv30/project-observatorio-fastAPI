@@ -7,3 +7,6 @@ def create_featuredData(db: Session, featuredData: FeaturedDataCreate):
 
 def list_featuredData(db: Session):
     return featuredData_repository.get_featuredData(db)
+
+def list_featuredData_by_categoryId(db: Session, category_id: int):
+    return featuredData_repository.get_featuredData_by_categoryId(db, category_id)

@@ -17,3 +17,6 @@ def create_featuredData(db: Session, featuredData: FeaturedDataCreate):
 
 def get_featuredData(db: Session):
   return db.query(FeaturedData).all()
+
+def get_featuredData_by_categoryId(db: Session, category_id: int):
+    return db.query(FeaturedData).filter(FeaturedData.category_id == category_id).all()
