@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.persistance.models.category import Category
+from app.persistance.models.category_models import Category
 from app.domain.schemas.category_schema import CategoryCreate
 
 def create_category(db: Session, category: CategoryCreate):

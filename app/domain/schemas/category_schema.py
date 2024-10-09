@@ -9,16 +9,3 @@ class CategoryResponse(BaseModel):
 
     class Config:
         orm_mode = True
-
-class FeaturedDataCreate(BaseModel):
-    city: str
-    percentage: float
-    category_id: int
-
-class FeaturedDataResponse(BaseModel):
-    id_featured: int
-    city: str
-    percentage: float
-
-    class Config:
-        orm_mode = True

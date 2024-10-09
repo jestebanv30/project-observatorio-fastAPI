@@ -1,0 +1,25 @@
+-- Creacion de base de datos con POSTGRESQL
+
+CREATE DATABASE project_observatory;
+
+-- Tabla categories
+
+CREATE TABLE categories (
+    id_category SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+
+-- Tabla featured_data 
+
+CREATE TABLE featured_data (
+    id_featured SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    data NUMERIC NOT NULL,
+    is_main BOOLEAN DEFAULT FALSE,
+    category_id INT REFERENCES categories(id_category) ON DELETE SET NULL
+);
+
+
+-- is_main: atributo booleano para listarlo en el dashboard (sin categoria asociada)
