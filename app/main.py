@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.controller.category_controller import router as category_router
-from app.controller.featuredData_controller import router as featuredData_router
+from app.controller import file_controller, category_controller, featuredData_controller
 
 app = FastAPI()
 
@@ -15,5 +14,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(category_router)
-app.include_router(featuredData_router)
+app.include_router(category_controller.router)
+app.include_router(featuredData_controller.router)
+app.include_router(file_controller.router)
