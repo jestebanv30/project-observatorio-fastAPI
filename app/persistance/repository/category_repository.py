@@ -3,7 +3,7 @@ from app.persistance.models.category_models import Category
 from app.domain.schemas.category_schema import CategoryCreate
 
 def create_category(db: Session, category: CategoryCreate):
-    db_category = Category(name=category.name)
+    db_category = Category(name=category.name, parent_id=category.parent_id)
     db.add(db_category)
     db.commit()
     db.refresh(db_category)

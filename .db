@@ -23,3 +23,24 @@ CREATE TABLE featured_data (
 
 
 -- is_main: atributo booleano para listarlo en el dashboard (sin categoria asociada)
+
+
+-- Tabla categories con soporte para subcategorías
+
+CREATE TABLE categories (
+    id_category SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    parent_id INT REFERENCES categories(id_category) ON DELETE CASCADE
+);
+
+
+-- Modificacion para hacer la tabla recursiva:
+-- Agregar la columna parent_id
+ALTER TABLE categories
+ADD COLUMN parent_id INT;
+-- Crear la clave foránea
+ALTER TABLE categories
+ADD CONSTRAINT fk_parent_category
+FOREIGN KEY (parent_id)
+REFERENCES categories(id_category)
+ON DELETE CASCADE;
