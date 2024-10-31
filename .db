@@ -44,3 +44,13 @@ ADD CONSTRAINT fk_parent_category
 FOREIGN KEY (parent_id)
 REFERENCES categories(id_category)
 ON DELETE CASCADE;
+
+
+-- Crear Tabla chart_data para los gráficos
+CREATE TABLE chart_data (
+    id_chart SERIAL PRIMARY KEY,
+    year INT NOT NULL,
+    week INT,  -- Este campo será NULL para datos anuales
+    value NUMERIC NOT NULL,
+    category_id INT REFERENCES categories(id_category) ON DELETE CASCADE
+);

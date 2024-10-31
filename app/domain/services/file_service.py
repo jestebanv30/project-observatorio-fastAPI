@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 from fastapi import UploadFile
-from fastapi import HTTPException
 from app.persistance.repository.file_repository import FileRepository
 
 class FileService:
