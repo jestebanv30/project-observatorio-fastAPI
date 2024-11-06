@@ -54,3 +54,20 @@ CREATE TABLE chart_data (
     value NUMERIC NOT NULL,
     category_id INT REFERENCES categories(id_category) ON DELETE CASCADE
 );
+
+-- Identificador unico del nombre del gráfico
+ALTER TABLE chart_data
+ADD COLUMN chart_name VARCHAR(255) NOT NULL;
+
+-- Identificador para tipo de tabla (anual o semanal)
+ALTER TABLE chart_data
+ADD COLUMN chart_type VARCHAR(20) CHECK (chart_type IN ('annual', 'weekly')) NOT NULL;
+
+-- Eliminar las columnas 'year' y 'week'
+ALTER TABLE chart_data
+DROP COLUMN year,
+DROP COLUMN week;
+
+-- Agregar la nueva columna 'date'
+ALTER TABLE chart_data
+ADD COLUMN date VARCHAR(20) NOT NULL;
