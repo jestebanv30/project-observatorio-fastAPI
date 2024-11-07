@@ -10,3 +10,9 @@ def list_featuredData(db: Session):
 
 def list_featuredData_by_categoryId(db: Session, category_id: int):
     return featuredData_repository.get_featuredData_by_categoryId(db, category_id)
+
+def update_featuredData(db: Session, id_featured: int, new_featuredData: FeaturedDataCreate):
+    return featuredData_repository.update_featuredData(db, id_featured, new_featuredData)
+
+def delete_featuredData(db: Session, id_featured: int):
+    return featuredData_repository.delete_featuredData(db, id_featured)
