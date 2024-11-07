@@ -6,5 +6,10 @@ def create_category(db: Session, category: CategoryCreate):
     return category_repository.create_category(db, category)
 
 def list_categories(db: Session):
-    # Listar categorías principales y sus subcategorías
     return category_repository.get_categories(db)
+
+def update_category(db: Session, id_category: int, new_category: CategoryCreate):
+    return category_repository.update_category(db, id_category, new_category)
+
+def delete_category(db: Session, id_category: int):
+    return category_repository.delete_category(db, id_category)

@@ -13,5 +13,3 @@ class CategoryResponse(BaseModel):
 
     class Config:
         orm_mode = True
-
-#CategoryResponse.update_forward_refs()
