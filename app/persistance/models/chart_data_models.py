@@ -12,5 +12,6 @@ class ChartData(Base):
   category_id = Column(Integer, ForeignKey("categories.id_category"), nullable=False)
   chart_name = Column(String, nullable=False)
   chart_type = Column(String, nullable=False)
+  year = Column(Integer, nullable=True)
 
   category = relationship("Category", backref="chart_data")

@@ -9,7 +9,8 @@ def create_chart_data(db: Session, chart_data: ChartDataCreate):
       "value": data_point.value,
       "category_id": chart_data.category_id,
       "chart_name": chart_data.chart_name,
-      "chart_type": chart_data.chart_type
+      "chart_type": chart_data.chart_type,
+      "year": chart_data.year
     })
 
 def list_chart_data_by_category(db: Session, category_id: int):
@@ -17,13 +18,14 @@ def list_chart_data_by_category(db: Session, category_id: int):
 
   charts = {}
   for point in data_points:
-    key = (point.chart_name, point.chart_type, point.category_id)
+    key = (point.chart_name, point.chart_type, point.category_id, point.year)
 
     if key not in charts:
       charts[key] = {
         "category_id": point.category_id,
         "chart_name": point.chart_name,
         "chart_type": point.chart_type,
+        "year": point.year,
         "data_points": []
       }
     

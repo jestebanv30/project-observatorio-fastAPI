@@ -12,8 +12,8 @@ def create_chart_data(chart_data: ChartDataCreate, db: Session = Depends(get_db)
   try:
     chart_data_service.create_chart_data(db, chart_data)
     return {"message": "Se creó los datos de gráficos correctamente"}
-  except Exception:
-    raise HTTPException(status_code=500, detail="Error al guardar los datos")
+  except Exception as e:
+    raise HTTPException(status_code=500, detail=f"Error al guardar los datos: {e}")
 
 # Ruta para listar gráficas por categoría
 @router.get("/category/{category_id}", response_model=list[ChartDataResponse])

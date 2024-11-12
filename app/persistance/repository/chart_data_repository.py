@@ -7,7 +7,8 @@ def create_chart_data(db: Session, data_point: dict):
     value=data_point["value"],
     category_id=data_point["category_id"],
     chart_name=data_point["chart_name"],
-    chart_type=data_point["chart_type"])
+    chart_type=data_point["chart_type"],
+    year=data_point["year"])
   db.add(db_chart_data)
   db.commit()
   db.refresh(db_chart_data)
