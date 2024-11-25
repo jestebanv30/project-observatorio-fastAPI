@@ -27,3 +27,6 @@ CREATE TABLE chart_data (
 
 -- Nuevo atributo para filtrado referenciar las tablas de tipo "semanales"
 ALTER TABLE chart_data ADD COLUMN year integer;
+
+-- Nuevo atributo para la información de cada categoría
+ALTER TABLE categories ADD COLUMN description VARCHAR;
