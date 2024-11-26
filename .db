@@ -1,56 +1,32 @@
--- Creacion de base de datos con POSTGRESQL
-
-CREATE DATABASE project_observatory;
-
--- Tabla categories
-
-CREATE TABLE categories (
-    id_category SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-
-
--- Tabla featured_data 
-
-CREATE TABLE featured_data (
-    id_featured SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    date DATE NOT NULL,
-    data NUMERIC NOT NULL,
-    is_main BOOLEAN DEFAULT FALSE,
-    category_id INT REFERENCES categories(id_category) ON DELETE SET NULL
-);
-
-
--- is_main: atributo booleano para listarlo en el dashboard (sin categoria asociada)
-
-
--- Tabla categories con soporte para subcategorías
-
+-- Crear la tabla 'categories' con soporte para subcategorías y columna 'parent_id' para recursividad
 CREATE TABLE categories (
     id_category SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     parent_id INT REFERENCES categories(id_category) ON DELETE CASCADE
 );
 
+-- Crear la tabla 'featured_data' con referencia a 'categories'
+CREATE TABLE featured_data (
+    id_featured SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL, 
+    date DATE NOT NULL,
+    data NUMERIC NOT NULL,
+    is_main BOOLEAN DEFAULT FALSE,
+    category_id INT REFERENCES categories(id_category) ON DELETE SET NULL
+);
 
--- Modificacion para hacer la tabla recursiva:
--- Agregar la columna parent_id
-ALTER TABLE categories
-ADD COLUMN parent_id INT;
--- Crear la clave foránea
-ALTER TABLE categories
-ADD CONSTRAINT fk_parent_category
-FOREIGN KEY (parent_id)
-REFERENCES categories(id_category)
-ON DELETE CASCADE;
-
-
--- Crear Tabla chart_data para los gráficos
+-- Crear la tabla 'chart_data' para los gráficos con las columnas necesarias
 CREATE TABLE chart_data (
     id_chart SERIAL PRIMARY KEY,
-    year INT NOT NULL,
-    week INT,  -- Este campo será NULL para datos anuales
     value NUMERIC NOT NULL,
-    category_id INT REFERENCES categories(id_category) ON DELETE CASCADE
+    category_id INT REFERENCES categories(id_category) ON DELETE CASCADE,
+    chart_name VARCHAR(255) NOT NULL,
+    chart_type VARCHAR(20) CHECK (chart_type IN ('annual', 'weekly')) NOT NULL,
+    date VARCHAR(20) NOT NULL
 );
+
+-- Nuevo atributo para filtrado referenciar las tablas de tipo "semanales"
+ALTER TABLE chart_data ADD COLUMN year integer;
+
+-- Nuevo atributo para la información de cada categoría
+ALTER TABLE categories ADD COLUMN description VARCHAR;
