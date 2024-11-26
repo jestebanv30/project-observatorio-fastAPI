@@ -30,3 +30,13 @@ ALTER TABLE chart_data ADD COLUMN year integer;
 
 -- Nuevo atributo para la información de cada categoría
 ALTER TABLE categories ADD COLUMN description VARCHAR;
+
+-- Crear Tabla users
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    hashed_password VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    is_verified BOOLEAN DEFAULT FALSE,
+    role VARCHAR(50) DEFAULT 'user'
+);
